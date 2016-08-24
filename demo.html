@@ -7,11 +7,11 @@
         <script src="uibots.js"></script>
         <script type='text/javascript'>
             var target = {
-                num : 0,
+                num : .5,
                 bool : false,
                 options : 'A',
                 string : 'Hello',
-                ping : function(a, b) {
+                func : function(a, b) {
                     console.log(a, b);
                 }
             }
@@ -30,14 +30,24 @@
                     options : ['A', 'B', 'C']
                 },
 
-                ping : {
+                func : {
                     args : ['hello', 'world']
                 },
 
-                defaults: ['bool', 'options', 'string']
+                defaults: ['bool', 'string']
             }
+
             var uibot = UIBot();
             uibot.build(target, params, document.getElementById('uibot'));
+            uibot.bind();
+
+
+            setInterval(function() {
+                target.num = 0.5;
+                target.bool = false;
+                target.options = 'A';
+                target.string = 'Hello';
+            }, 3000);
         </script>
     </body>
 </html>
