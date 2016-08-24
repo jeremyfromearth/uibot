@@ -25,6 +25,10 @@ function UIBot() {
                     input = createStringComponent(target, param, container);
                     break;
             }
+            
+            if(input != null) {
+                input.id = 'uibot-' + uibotId + '-' + param.name;
+            }
         }
     }
 
@@ -48,10 +52,33 @@ function UIBot() {
             target[param.name] = input.checked;
             console.log(input.checked);
         });
+
+        bindings.push(function() {
+            input.checked = target[param.name];
+        });
+
+        return input;
     }
 
     function createFunctionComponent(target, param, container) {
+        var div = document.createElement('div');
+        div.className = 'uibot_component_container';
+        
+        var input = document.createElement('input');
+        input.type = 'button';
+        input.param = param;
+        input.value = param.label;
+        input.className = 'uibot-button';
+        
+        div.appendChild(input);
+        container.appendChild(div);
 
+        input.addEventListener('click', function() {
+            var args = param.args || []
+            target[param.name].apply(null, args);
+        });
+
+        return input;
     }
 
     function createNumberComponent(target, param, container) {
@@ -81,31 +108,4 @@ function UIBot() {
     }
 }
 
-var target = {
-    num : 0,
-    bool : false,
-    options : 'A',
-    string : 'Hello',
-    ping : function() {
-        console.log('ping');
-    }
-}
 
-var params = {
-    num : {
-        min : 0,
-        max : 1,
-        step : 0.1,
-        units : 'db',
-        label : 'Amplitude'
-    },
-
-    options : {
-        options : ['A', 'B', 'C']
-    },
-
-    defaults: ['bool', 'options', 'string', 'ping']
-}
-
-var uibot = UIBot();
-uibot.build(target, params, document.body);

@@ -1,5 +1,39 @@
 <html>
     <body>
         <script src="uibots.js"></script>
+        <script type='text/javascript'>
+            var target = {
+                num : 0,
+                bool : false,
+                options : 'A',
+                string : 'Hello',
+                ping : function(a, b) {
+                    console.log(a, b);
+                }
+            }
+
+            var x = 1981;
+            var params = {
+                num : {
+                    min : 0,
+                    max : 1,
+                    step : 0.1,
+                    units : 'db',
+                    label : 'Amplitude'
+                },
+
+                options : {
+                    options : ['A', 'B', 'C']
+                },
+
+                ping : {
+                    args : ['hello', 'world']
+                },
+
+                defaults: ['bool', 'options', 'string']
+            }
+            var uibot = UIBot();
+            uibot.build(target, params, document.body);
+        </script>
     </body>
 </html>
