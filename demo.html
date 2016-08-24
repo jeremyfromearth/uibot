@@ -16,7 +16,6 @@
                 }
             }
 
-            var x = 1981;
             var params = {
                 num : {
                     min : 0,
@@ -40,14 +39,6 @@
             var uibot = UIBot();
             uibot.build(target, params, document.getElementById('uibot'));
             uibot.bind();
-
-
-            setInterval(function() {
-                target.num = 0.5;
-                target.bool = false;
-                target.options = 'A';
-                target.string = 'Hello';
-            }, 3000);
         </script>
     </body>
 </html>

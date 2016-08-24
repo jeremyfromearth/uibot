@@ -1,17 +1,15 @@
 /* UIBot */
 #uibot {
     width: 300px;
-    font-family: Helvetica;
-}
-
-#uibot div {
-
+    font-size: 0.8em;
+    font-family: "Lucida Console", Monaco, monospace;
 }
 
 .uibot_component_container {
-    background: #888888;
-    padding: 5px;
-    margin: 5px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 0.5em;
+    margin: 0.1em;
 }
 
 .uibot_component_label {
@@ -25,6 +23,7 @@
 }
 
 .uibot_range_row {
+
 }
 
 .uibot_range_label_min, .uibot_range_label_max {
