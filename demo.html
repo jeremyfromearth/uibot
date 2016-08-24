@@ -1,5 +1,9 @@
 <html>
+    <head>
+        <link rel='stylesheet' type='text/css' href='uibot.css'>
+    </head>
     <body>
+        <div id='uibot'></div>
         <script src="uibots.js"></script>
         <script type='text/javascript'>
             var target = {
@@ -33,7 +37,7 @@
                 defaults: ['bool', 'options', 'string']
             }
             var uibot = UIBot();
-            uibot.build(target, params, document.body);
+            uibot.build(target, params, document.getElementById('uibot'));
         </script>
     </body>
 </html>

@@ -1,0 +1,58 @@
+/* UIBot */
+#uibot {
+    width: 300px;
+    font-family: Helvetica;
+}
+
+#uibot div {
+
+}
+
+.uibot_component_container {
+    background: #888888;
+    padding: 5px;
+    margin: 5px;
+}
+
+.uibot_component_label {
+    float: left;
+    margin-right: 10;
+}
+
+/* Slider */
+.uibot_range {
+    width: 200px;
+}
+
+.uibot_range_row {
+}
+
+.uibot_range_label_min, .uibot_range_label_max {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.uibot_range_label_min {
+    margin-right: 5px;
+}
+
+.uibot_range_label_max {
+    margin-left: 5px;
+}
+
+/* Select Menu */
+
+.ui_bot_select_menu {
+
+}
+
+/* Text Input */
+.uibot_text_input {
+
+}
+
+/* Button */
+.uibot_button {
+    width: 100%;
+}
+

@@ -134,6 +134,11 @@ function UIBot() {
                 target[param.name] = Number(input.value);
                 value.innerHTML = target[param.name] + ' ' + param.units;
             });
+
+            bindings.push(function() {
+                input.value = target[param.name];
+                value.innerHTML = target[param.name] + ' ' + param.units;
+            });
         }
     }
 
