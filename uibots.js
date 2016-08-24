@@ -42,6 +42,7 @@ function UIBot() {
 
         var input = document.createElement('input');
         input.type = 'checkbox';
+        input.className = 'uibot_checkbox';
         input.checked = target[param.name];
 
         div.appendChild(label);
@@ -82,10 +83,65 @@ function UIBot() {
     }
 
     function createNumberComponent(target, param, container) {
+        if(param.options) {
 
+        } else {
+            param.step = param.step || 0.1;
+            param.range = param.range || [0, 1.0];
+            param.units = param.units || '';
+
+            var div = document.createElement('div');
+            div.className = 'uibot_component_container';
+
+            var label = document.createElement('div');
+            label.innerHTML = param.label + ':';
+            label.className = 'uibot_component_label';
+
+            var value = document.createElement('div');
+            value.innerHTML = target[param.name] + ' ' + param.units;
+            value.className = 'uibot_range_value_field';
+
+            var rangeDiv = document.createElement('div');
+            rangeDiv.className = 'uibot_range_div';
+
+            var input = document.createElement('input');
+            input.type = 'range';
+            input.className = 'uibot_range';
+            input.min = param.range[0];
+            input.max = param.range[1];
+            input.step = param.step;
+            input.value = target[param.name];
+            input.param = param;
+
+            var min = document.createElement('div');
+            min.innerHTML = param.range[0];
+            min.className = 'uibot_range_label_min';
+
+            var max = document.createElement('div');
+            max.innerHTML = param.range[1];
+            max.className = 'uibot_range_label_max';
+
+            rangeDiv.appendChild(min);
+            rangeDiv.appendChild(input);
+            rangeDiv.appendChild(max);
+
+            div.appendChild(label);
+            div.appendChild(value);
+            div.appendChild(rangeDiv);
+            container.appendChild(div);
+
+            input.addEventListener('input', function(event) {
+                target[param.name] = Number(input.value);
+                value.innerHTML = target[param.name] + ' ' + param.units;
+            });
+        }
     }
 
     function createStringComponent(target, param, container) {
+
+    }
+
+    function createSelectComponent(target, param, container) {
 
     }
 
@@ -107,5 +163,3 @@ function UIBot() {
         }
     }
 }
-
-
