@@ -221,12 +221,12 @@ function UIBot() {
         });
     }
 
-    function bind() {
+    function bind(interval) {
         bindId = setInterval(function() {
             for(var i = 0; i < bindings.length; i++) {
                 bindings[i]();
             }
-        }, 500);
+        }, interval || 500);
     }
 
     function unbind() {
