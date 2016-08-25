@@ -2,27 +2,34 @@
 UIBot is a JavaScript library for quickly generating input controls such as text input, sliders, menus, buttons and toggles, nearly automatically.
 
 ## Basic Example
-In the example below, two sliders would be added to the container parameter supplied to the build() method in the last line. The first slider would have the label "Amplitude" and would provide values between 0 and 1 in increments of .01. The second slider would have the label "Osc 1", provide values between 1 and 20000 in increments of 1 and would also append the unit of measure "Hz" to the current value. Upon using the sliders the values of the supplied oscillator object would be set.
+In the example below, two sliders would be added to the container parameter supplied to the build() method in the last line. The first slider would have the label "Amplitude" and would provide values between 0 and 1 in increments of .01. The second slider would have the label "Osc 1", provide values between 1 and 20000 in increments of 1 and would also append the unit of measure "Hz" to the current value. Upon using the sliders the values of the supplied oscillator object would be set. The `enabled` property of the oscillator object would have a checkbox created for it using the default parameters.
+
+![Image of interface created by above script](./img/oscillator.png)
 
 ```js
 var oscillator = {
-    var amplitude = 0.5;
-    var frequency = 440;
+    amp : 0.5,
+    freq : 440,
+    enabled : false
 }
 
 var params = {
-    amplitude : {
-        step : .01
-        range : [0, 1.0]
+    // Set parameters for amplitude property
+    amp : {
+        step : .01,
+        range : [0, 1.0],
+        label : 'Amplitude'
     },
-    frequency : {
-        step : 1
-        units : 'Hz'
-        label : 'Osc 1'
+    // Set parameters for frequency
+    freq : {
+        step : 1,
+        units : 'Hz',
+        label : 'Frequency',
         range : [1, 20000]
-    }
+    },
+    // Create a default component for all properties in the following list
+    defaults: ['enabled']
 }
-
 var uibot = UIBot();
 var ui = uibot.build(params, oscillator)
 document.body.appendChild(ui);
