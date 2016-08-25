@@ -241,6 +241,10 @@ function UIBot() {
         clearInterval(bindId);
     }
 
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+    }
+
     return {
         id : uibotId,
         bind : bind,
@@ -249,11 +253,11 @@ function UIBot() {
                 var param = params[name];
                 if(name == 'defaults') {
                     for(var item in param) {
-                        createUIElement(target, {label : param[item], name : param[item]}, container);
+                        createUIElement(target, {label : toTitleCase(param[item]), name : param[item]}, container);
                     }
                 } else {
                     param.name = name;
-                    param.label = param.label || name;
+                    param.label = toTitleCase(param.label || name);
                     createUIElement(target, param, container);
                 }
             }

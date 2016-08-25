@@ -1,8 +1,8 @@
 /* UIBot */
 #uibot {
     width: 300px;
-    font-size: 0.8em;
-    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 1em;
+    font-family: monospace;
 }
 
 .uibot_component_container {
@@ -28,7 +28,7 @@
 
 .uibot_range_label_min, .uibot_range_label_max {
     display: inline-block;
-    font-size: 14px;
+    font-size: 1em;
 }
 
 .uibot_range_label_min {
