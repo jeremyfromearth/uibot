@@ -1,10 +1,8 @@
 # uibot
-UIBot is a JavaScript library for quickly generating input controls such as text input, sliders, menus, buttons and toggles, nearly automatically.
+UIBot is a JavaScript library for quickly generating input controls such as text input, sliders, menus, buttons and toggles, nearly automatically. UIBot is intended to be used for rapid prototyping and interactive visualizations.
 
 ## Basic Example
 In the example below, two sliders would be added to the container parameter supplied to the `build()` method in the last line. The first slider would have the label "Amplitude" and would provide values between 0 and 1 in increments of .01. The second slider would have the label "Frequency", and provide values between 1 and 20000 in increments of 1 and would also append the unit of measure "Hz" to the current value. The `enabled` property of the oscillator object would have a checkbox created for it using the default parameters.
-
-<img src='./img/oscillator.png' width='217'/>
 
 ```js
 var oscillator = {
@@ -34,6 +32,8 @@ var uibot = UIBot();
 var ui = uibot.build(params, oscillator)
 document.body.appendChild(ui);
 ```
+<img src='./img/oscillator.png' width='217'/><br/>
+_The generated UI from the script above._
 
 ## Datatypes
 UIBot uses the data-type of the parameter to determine what kind of input to create. From the example above, UIBot will see that the amplitude property of the `oscillator` is a number and will create a slider control. UIBot will use defaults where properties are omitted. For instance, if the `step` property were to be left out of the frequency parameter, it would default to a value of .01.
