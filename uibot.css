@@ -1,57 +1,29 @@
-/* UIBot */
-#uibot {
-    width: 300px;
+.uibot {
+    width: 20em;
     font-size: 1em;
     font-family: monospace;
+    display: inline-block;
 }
 
-.uibot_component_container {
+.uibot .container {
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 0.5em;
+    padding: 0.7em;
     margin: 0.1em;
-}
-
-.uibot_component_label {
     float: left;
-    margin-right: 10;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
-/* Slider */
-.uibot_range {
-    width: 200px;
+.uibot .label {
+    float: left;
+    margin-right: 0.4em;
 }
 
-.uibot_range_row {
-
-}
-
-.uibot_range_label_min, .uibot_range_label_max {
+.uibot .range-min, .range-max {
     display: inline-block;
     font-size: 1em;
 }
 
-.uibot_range_label_min {
-    margin-right: 5px;
-}
-
-.uibot_range_label_max {
-    margin-left: 5px;
-}
-
-/* Select Menu */
-
-.ui_bot_select_menu {
-
-}
-
-/* Text Input */
-.uibot_text_input {
-
-}
-
-/* Button */
-.uibot_button {
+.uibot .button {
     width: 100%;
 }
 

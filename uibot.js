@@ -33,15 +33,14 @@ function UIBot() {
 
     function createBooleanComponent(target, param, container) {
         var div = document.createElement('div');
-        div.className = 'uibot_component_container';
+        div.className = 'container';
         
         var label = document.createElement('div');
-        label.className = 'uibot_component_label';
+        label.className = 'label';
         label.innerHTML = param.label;
 
         var input = document.createElement('input');
         input.type = 'checkbox';
-        input.className = 'uibot_checkbox';
         input.checked = target[param.name];
 
         div.appendChild(label);
@@ -61,13 +60,13 @@ function UIBot() {
 
     function createFunctionComponent(target, param, container) {
         var div = document.createElement('div');
-        div.className = 'uibot_component_container';
+        div.className = 'container';
         
         var input = document.createElement('input');
         input.type = 'button';
         input.param = param;
         input.value = param.label;
-        input.className = 'uibot_button';
+        input.className = 'button';
         
         div.appendChild(input);
         container.appendChild(div);
@@ -89,22 +88,18 @@ function UIBot() {
             param.units = param.units || '';
 
             var div = document.createElement('div');
-            div.className = 'uibot_component_container';
+            div.className = 'container';
 
             var label = document.createElement('div');
             label.innerHTML = param.label + ':';
-            label.className = 'uibot_component_label';
+            label.className = 'label';
 
             var value = document.createElement('div');
             value.innerHTML = target[param.name] + ' ' + param.units;
-            value.className = 'uibot_range_value_field';
 
             var rangeDiv = document.createElement('div');
-            rangeDiv.className = 'uibot_range_div';
-
             var input = document.createElement('input');
             input.type = 'range';
-            input.className = 'uibot_range';
             input.min = param.range[0];
             input.max = param.range[1];
             input.step = param.step;
@@ -113,11 +108,11 @@ function UIBot() {
 
             var min = document.createElement('div');
             min.innerHTML = param.range[0];
-            min.className = 'uibot_range_label_min';
+            min.className = 'range-min';
 
             var max = document.createElement('div');
             max.innerHTML = param.range[1];
-            max.className = 'uibot_range_label_max';
+            max.className = 'range-max';
 
             rangeDiv.appendChild(min);
             rangeDiv.appendChild(input);
@@ -145,14 +140,13 @@ function UIBot() {
             createSelectComponent(target, param, container);
         } else {
             var div = document.createElement('div');
-            div.className = 'uibot_component_container';
+            div.className = 'container';
 
             var label = document.createElement('div');
-            label.className = 'uibot_component_label';
+            label.className = 'label';
             label.innerHTML = param.label;
 
             var input = document.createElement('input');
-            input.className = 'uibot_text_input';
             input.type = 'text';
             input.value = target[param.name];
 
@@ -187,15 +181,13 @@ function UIBot() {
 
     function createSelectComponent(target, param, container) {
         var div = document.createElement('div');
-        div.className = 'uibot_component_container';
+        div.className = 'container';
 
         var label = document.createElement('div');
-        label.className = 'uibot_component_label';
+        label.className = 'label';
         label.innerHTML = param.label;
 
         var select = document.createElement('select');
-        select.className = 'uibot_select';
-
         for(var i = 0; i < param.options.length; i++) {
             var option = document.createElement('option');
             option.value = param.options[i];
@@ -249,6 +241,9 @@ function UIBot() {
         id : uibotId,
         bind : bind,
         build : function(target, params, container) {
+            var container = container || document.createElement('div');
+            container.className = 'uibot';
+            container.id = 'uibot-' + uibotId + '-container';
             for(var name in params) {
                 var param = params[name];
                 if(name == 'defaults') {
