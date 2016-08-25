@@ -45,8 +45,19 @@ Below is a list of supported data-types and the components that are created for 
 - Boolean: Creates a checkbox
 - Function: Creates a button that triggers the function when pressed
 
-## Parameter Object Specification
+## Two-way Binding
+UIBot supports two-way data binding. That is to say that changes made to properties on the target object will be reflected in the UI. Binding is simple. Once your UI is created simply call the `bind()` method. You can optionally pass an value in milliseconds to the bind method indicating how often variables that are bound should be updated. The default is 500 milliseconds.
 
+```js
+uibot.bind();
+```
+
+If you wish to cancel binding, call the `unbind()` method.
+```js
+uibot.unbind();
+```
+
+## Parameter Object Specification
 Datatype: `Function`<br/>
 Input Type: Button
 

@@ -6,30 +6,6 @@
         <div id='uibot'></div>
         <script src="uibot.js"></script>
         <script type='text/javascript'>
-            var oscillator = {
-                amp : 0.5,
-                freq : 440,
-                enabled : false
-            }
-
-            var params = {
-                // Set parameters for amplitude property
-                amp : {
-                    step : .01,
-                    range : [0, 1.0],
-                    label : 'Amplitude'
-                },
-                // Set parameters for frequency
-                freq : {
-                    step : 1,
-                    units : 'Hz',
-                    label : 'Frequency',
-                    range : [1, 20000]
-                },
-                // Create a default component for all properties in the following list
-                defaults: ['enabled']
-            }
-
             var target = {
                 num : .5,
                 bool : false,
@@ -39,7 +15,7 @@
                     console.log(a, b);
                 }
             }
-            /*
+
             var params = {
                 num : {
                     min : 0,
@@ -59,10 +35,9 @@
 
                 defaults: ['bool', 'string']
             }           
-            */
 
             var uibot = UIBot();
-            uibot.build(oscillator, params, document.getElementById('uibot'));
+            uibot.build(target, params, document.getElementById('uibot'));
             uibot.bind();
         </script>
     </body>
