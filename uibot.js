@@ -4,7 +4,7 @@ function UIBot() {
     var bindings = [];
     var uibotId = ++UIBotId;
     
-    function createUIElement(target, param, container) {
+    function createUIElement(target, param, container, callback) {
         if(!target.hasOwnProperty(param.name)) {
             console.log('UIBots Warning: target does not contain property: ', param.name);
         } else {
@@ -12,16 +12,16 @@ function UIBot() {
             var type = typeof(target[param.name]); 
             switch(type) {
                 case 'boolean':
-                    input = createBooleanComponent(target, param, container);
+                    input = createBooleanComponent(target, param, container, callback);
                     break;
                 case 'function':
-                    input = createFunctionComponent(target, param, container);
+                    input = createFunctionComponent(target, param, container, callback);
                     break;
                 case 'number':
-                    input = createNumberComponent(target, param, container);
+                    input = createNumberComponent(target, param, container, callback);
                     break;
                 case 'string':
-                    input = createStringComponent(target, param, container);
+                    input = createStringComponent(target, param, container, callback);
                     break;
             }
             
@@ -31,7 +31,7 @@ function UIBot() {
         }
     }
 
-    function createBooleanComponent(target, param, container) {
+    function createBooleanComponent(target, param, container, callback) {
         var div = document.createElement('div');
         div.className = 'boolean-container';
         
@@ -49,6 +49,7 @@ function UIBot() {
 
         input.addEventListener('change', function(event) {
             target[param.name] = input.checked;
+            if(callback) callback();
         });
 
         bindings.push(function() {
@@ -79,9 +80,9 @@ function UIBot() {
         return input;
     }
 
-    function createNumberComponent(target, param, container) {
+    function createNumberComponent(target, param, container, callback) {
         if(param.hasOwnProperty('options')) {
-
+            createSelectComponent(target, param, container, callback);
         } else {
             param.step = param.step || 0.1;
             param.range = param.range || [0, 1.0];
@@ -126,6 +127,7 @@ function UIBot() {
             input.addEventListener('input', function(event) {
                 target[param.name] = Number(input.value);
                 value.innerHTML = target[param.name] + ' ' + param.units;
+                if(callback) callback();
             });
 
             bindings.push(function() {
@@ -135,9 +137,9 @@ function UIBot() {
         }
     }
 
-    function createStringComponent(target, param, container) {
+    function createStringComponent(target, param, container, callback) {
         if(param.hasOwnProperty('options')) {
-            createSelectComponent(target, param, container);
+            createSelectComponent(target, param, container, callback);
         } else {
             var div = document.createElement('div');
             div.className = 'string-container';
@@ -162,6 +164,7 @@ function UIBot() {
             
             input.addEventListener('change', function(event) {
                 target[param.name] = input.value;
+                if(callback) callback();
             });
 
             var focus = false;
@@ -181,7 +184,7 @@ function UIBot() {
         }
     }
 
-    function createSelectComponent(target, param, container) {
+    function createSelectComponent(target, param, container, callback) {
         var div = document.createElement('div');
         div.className = 'select-container';
 
@@ -204,6 +207,7 @@ function UIBot() {
 
         select.addEventListener('change', function(event) {
             target[param.name] = param.options[select.selectedIndex];
+            if(callback) callback();
         })
 
         var focus = false;
@@ -224,6 +228,7 @@ function UIBot() {
     }
 
     function bind(interval) {
+        unbind();
         bindId = setInterval(function() {
             for(var i = 0; i < bindings.length; i++) {
                 bindings[i]();
@@ -242,7 +247,7 @@ function UIBot() {
     return {
         id : uibotId,
         bind : bind,
-        build : function(target, params, wrapper) {
+        build : function(target, params, wrapper, callback) {
             var container = document.createElement('div');
             wrapper.appendChild(container);
             container.className = 'uibot';
@@ -251,12 +256,12 @@ function UIBot() {
                 var param = params[name];
                 if(name == 'defaults') {
                     for(var item in param) {
-                        createUIElement(target, {label : toTitleCase(param[item]), name : param[item]}, container);
+                        createUIElement(target, {label : toTitleCase(param[item]), name : param[item]}, container, callback);
                     }
                 } else {
                     param.name = name;
                     param.label = param.label || toTitleCase(name);
-                    createUIElement(target, param, container);
+                    createUIElement(target, param, container, callback);
                 }
             }
         },
