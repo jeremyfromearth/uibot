@@ -260,3 +260,5 @@ function UIBot() {
         unind : unbind
     }
 }
+
+exports.UIBot = UIBot;
