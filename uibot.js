@@ -261,4 +261,4 @@ function UIBot() {
     }
 }
 
-module.exports = UIBot;
+export default UIBot
