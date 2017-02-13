@@ -261,4 +261,4 @@ function UIBot() {
     }
 }
 
-exports.UIBot = UIBot;
+module.exports = UIBot;
