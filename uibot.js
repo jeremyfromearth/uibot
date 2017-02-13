@@ -33,7 +33,7 @@ function UIBot() {
 
     function createBooleanComponent(target, param, container) {
         var div = document.createElement('div');
-        div.className = 'container';
+        div.className = 'boolean-container';
         
         var label = document.createElement('div');
         label.className = 'label';
@@ -43,8 +43,8 @@ function UIBot() {
         input.type = 'checkbox';
         input.checked = target[param.name];
 
-        div.appendChild(label);
         div.appendChild(input);
+        div.appendChild(label);
         container.appendChild(div);
 
         input.addEventListener('change', function(event) {
@@ -60,7 +60,7 @@ function UIBot() {
 
     function createFunctionComponent(target, param, container) {
         var div = document.createElement('div');
-        div.className = 'container';
+        div.className = 'function-container';
         
         var input = document.createElement('input');
         input.type = 'button';
@@ -88,7 +88,7 @@ function UIBot() {
             param.units = param.units || '';
 
             var div = document.createElement('div');
-            div.className = 'container';
+            div.className = 'number-container';
 
             var label = document.createElement('div');
             label.innerHTML = param.label + ':';
@@ -140,7 +140,7 @@ function UIBot() {
             createSelectComponent(target, param, container);
         } else {
             var div = document.createElement('div');
-            div.className = 'container';
+            div.className = 'string-container';
 
             var label = document.createElement('div');
             label.className = 'label';
@@ -149,6 +149,8 @@ function UIBot() {
             var input = document.createElement('input');
             input.type = 'text';
             input.value = target[param.name];
+            input.placeholder = param.placeholder || "";
+
 
             if(param.hasOwnProperty('max_length')) {
                 input.maxLength = param.max_length;
@@ -181,7 +183,7 @@ function UIBot() {
 
     function createSelectComponent(target, param, container) {
         var div = document.createElement('div');
-        div.className = 'container';
+        div.className = 'select-container';
 
         var label = document.createElement('div');
         label.className = 'label';
@@ -240,8 +242,9 @@ function UIBot() {
     return {
         id : uibotId,
         bind : bind,
-        build : function(target, params, container) {
-            var container = container || document.createElement('div');
+        build : function(target, params, wrapper) {
+            var container = document.createElement('div');
+            wrapper.appendChild(container);
             container.className = 'uibot';
             container.id = 'uibot-' + uibotId + '-container';
             for(var name in params) {
@@ -252,7 +255,7 @@ function UIBot() {
                     }
                 } else {
                     param.name = name;
-                    param.label = toTitleCase(param.label || name);
+                    param.label = param.label || toTitleCase(name);
                     createUIElement(target, param, container);
                 }
             }
