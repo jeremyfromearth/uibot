@@ -5,11 +5,11 @@ function UIBot() {
     var uibotId = ++UIBotId;
     
     function createUIElement(target, param, container) {
-        if(!target.hasOwnProperty([param.name])) {
+        if(!target.hasOwnProperty(param.name)) {
             console.log('UIBots Warning: target does not contain property: ', param.name);
         } else {
-            input = null;
-            type = typeof(target[param.name]); 
+            var input = null;
+            var type = typeof(target[param.name]); 
             switch(type) {
                 case 'boolean':
                     input = createBooleanComponent(target, param, container);
