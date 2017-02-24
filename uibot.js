@@ -53,7 +53,7 @@ function UIBot() {
 
         input.addEventListener('change', function(event) {
             target[param.name] = input.checked;
-            if(callback) callback();
+            if(callback) callback(event);
         });
 
         bindings.push(function() {
@@ -76,9 +76,10 @@ function UIBot() {
         div.appendChild(input);
         container.appendChild(div);
 
-        input.addEventListener('click', function() {
+        input.addEventListener('click', function(event) {
             var args = param.args || []
             target[param.name].apply(null, args);
+            if(callback) callback(event);
         });
 
         return input;
@@ -131,7 +132,7 @@ function UIBot() {
             input.addEventListener('input', function(event) {
                 target[param.name] = Number(input.value);
                 value.innerHTML = target[param.name] + ' ' + param.units;
-                if(callback) callback();
+                if(callback) callback(event);
             });
 
             bindings.push(function() {
@@ -168,7 +169,7 @@ function UIBot() {
             
             input.addEventListener('change', function(event) {
                 target[param.name] = input.value;
-                if(callback) callback();
+                if(callback) callback(event);
             });
 
             var focus = false;
@@ -210,7 +211,7 @@ function UIBot() {
 
         select.addEventListener('change', function(event) {
             target[param.name] = param.options[select.selectedIndex];
-            if(callback) callback();
+            if(callback) callback(event);
         })
 
         var focus = false;
