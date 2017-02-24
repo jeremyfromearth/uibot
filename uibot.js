@@ -170,7 +170,9 @@ function UIBot() {
             container.appendChild(div);
             
             input.addEventListener('change', function(event) {
-                target[param.name] = input.value;
+                var value = param.delimiter ?
+                    input.value.split(param.delimiter) : input.value;
+                target[param.name] = value;
                 if(callback) callback(event);
             });
 
