@@ -139,6 +139,8 @@ function UIBot() {
                 input.value = target[param.name];
                 value.innerHTML = target[param.name] + ' ' + param.units;
             });
+
+            return input;
         }
     }
 
