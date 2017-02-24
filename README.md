@@ -28,22 +28,16 @@ var params = {
     // Create a default component for all properties in the following list
     defaults: ['enabled']
 }
+
+
+function on_change(event) {
+
+}
+
 var uibot = UIBot();
-var ui = uibot.build(params, oscillator)
-document.body.appendChild(ui);
+var container = document.getElementById('uibot-wrapper');
+var ui = uibot.build(oscillator, params, container, on_change)
 ```
-<img src='./img/oscillator.png' width='217'/><br/>
-_The generated UI from the script above._
-
-## Datatypes
-UIBot uses the data-type of the parameter to determine what kind of input to create. From the example above, UIBot will see that the amplitude property of the `oscillator` is a number and will create a slider control. UIBot will use defaults where properties are omitted. For instance, if the `step` property were to be left out of the frequency parameter, it would default to a value of .01.
-
-Below is a list of supported data-types and the components that are created for each:
-
-- Number: Creates a slider or a select menu if an "options" property is specified
-- String: Creates a text input field or a select menu if an "options" property is specified
-- Boolean: Creates a checkbox
-- Function: Creates a button that triggers the function when pressed
 
 ## Two-way Binding
 UIBot supports two-way data binding. That is to say that changes made to properties on the target object will be reflected in the UI. Binding is simple. Once your UI is created simply call the `bind()` method. You can optionally pass an value in milliseconds to the bind method indicating how often variables that are bound should be updated. The default is 500 milliseconds.
@@ -56,6 +50,16 @@ If you wish to cancel binding, call the `unbind()` method.
 ```js
 uibot.unbind();
 ```
+
+## Datatypes
+UIBot uses the data-type of the parameter to determine what kind of input to create. From the example above, UIBot will see that the amplitude property of the `oscillator` is a number and will create a slider control. UIBot will use defaults where properties are omitted. For instance, if the `step` property were to be left out of the frequency parameter, it would default to a value of .01.
+
+Below is a list of supported data-types and the components that are created for each:
+
+- Number: Creates a slider or a select menu if an "options" property is specified
+- String: Creates a text input field or a select menu if an "options" property is specified
+- Boolean: Creates a checkbox
+- Function: Creates a button that triggers the function when pressed
 
 ## Parameter Object Specification
 Datatype: `Function`<br/>
@@ -125,6 +129,11 @@ variable_name : {
     // are ignored and a drop-down is displayed
     // Optional
     options : [‘a’, ‘b’, ‘c’, ‘d’]
+
+    // A character used as a delimiter
+    // Results in property being set to array
+    // Optional
+    delimiter : ','
 }
 ```
 
