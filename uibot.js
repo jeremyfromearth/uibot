@@ -168,13 +168,17 @@ function UIBot() {
             div.appendChild(label);
             div.appendChild(input);
             container.appendChild(div);
-            
-            input.addEventListener('change', function(event) {
+
+            function update(event) {
                 var value = param.delimiter ?
                     input.value.split(param.delimiter) : input.value;
                 target[param.name] = value;
                 if(callback) callback(event);
-            });
+            }
+            
+            input.addEventListener('change', update);
+
+            input.addEventListener('keyup', update);
 
             var focus = false;
             input.addEventListener('focus', function(event) {
