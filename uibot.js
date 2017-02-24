@@ -4,7 +4,7 @@ function UIBot() {
     var inputs = [];
     var bindings = [];
     var uibotId = ++UIBotId;
-    
+
     function createUIElement(target, param, container, callback) {
         if(!target.hasOwnProperty(param.name)) {
             console.log('UIBots Warning: target does not contain property: ', param.name);
@@ -27,6 +27,7 @@ function UIBot() {
             }
             
             if(input != null) {
+                input.setAttribute('data-param', param.name);
                 input.id = 'uibot-' + uibotId + '-' + param.name;
             }
             return input;
@@ -182,7 +183,6 @@ function UIBot() {
             bindings.push(function() {
                 if(!focus) input.value = target[param.name];
             });
-
             return input;
         }
     }
