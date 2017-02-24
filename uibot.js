@@ -1,6 +1,7 @@
 var UIBotId = 0;
 function UIBot() {
     var bindId = 0;
+    var inputs = [];
     var bindings = [];
     var uibotId = ++UIBotId;
     
@@ -28,7 +29,9 @@ function UIBot() {
             if(input != null) {
                 input.id = 'uibot-' + uibotId + '-' + param.name;
             }
+            return input;
         }
+        return null;
     }
 
     function createBooleanComponent(target, param, container, callback) {
@@ -247,21 +250,33 @@ function UIBot() {
     return {
         id : uibotId,
         bind : bind,
+        get_inputs : function() { return inputs; },
         build : function(target, params, wrapper, callback) {
             var container = document.createElement('div');
             wrapper.appendChild(container);
             container.className = 'uibot';
             container.id = 'uibot-' + uibotId + '-container';
+
+            var ignored = params['ignore'];
             for(var name in params) {
-                var param = params[name];
-                if(name == 'defaults') {
-                    for(var item in param) {
-                        createUIElement(target, {label : toTitleCase(param[item]), name : param[item]}, container, callback);
+                if(name != 'ignore' && ignored.indexOf(name) < 0) {
+                    var param = params[name];
+                    if(name == 'defaults') {
+                        for(var item in param) {
+                            var input = createUIElement(
+                                target, {
+                                    label : toTitleCase(param[item]), 
+                                    name : param[item]
+                                }, 
+                                container, callback);
+                            if(input) inputs.push(input);
+                        }
+                    } else {
+                        param.name = name;
+                        param.label = param.label || toTitleCase(name);
+                        var input = createUIElement(target, param, container, callback);
+                        if(input) inputs.push(input);
                     }
-                } else {
-                    param.name = name;
-                    param.label = param.label || toTitleCase(name);
-                    createUIElement(target, param, container, callback);
                 }
             }
         },
