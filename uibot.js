@@ -253,7 +253,9 @@ function UIBot() {
     }
 
     function toTitleCase(str) {
-        return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        return str.replace(/\w\S*/g, function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
     }
 
     return {
@@ -268,7 +270,7 @@ function UIBot() {
 
             var ignored = params['ignore'];
             for(var name in params) {
-                if(name != 'ignore' && ignored.indexOf(name) < 0) {
+                if(name != 'ignore' && !(ignored && ignored.indexOf(name) >= 0)) {
                     var param = params[name];
                     if(name == 'defaults') {
                         for(var item in param) {
@@ -292,5 +294,3 @@ function UIBot() {
         unind : unbind
     }
 }
-
-export default UIBot
