@@ -1,39 +1,38 @@
 <html>
     <head>
-        <link rel='stylesheet' type='text/css' href='uibot.css'>
+        <link rel='stylesheet' type='text/css' href='default-uibot.css'>
     </head>
     <body>
         <div id='uibot'></div>
         <script src="uibot.js"></script>
         <script type='text/javascript'>
             var target = {
-                num : .5,
-                bool : false,
-                options : 'A',
-                string : 'Hello',
-                func : function(a, b) {
+                num: .5,
+                bool: false,
+                options: 'A',
+                string: 'Hello',
+                ignored: 'I am an ignored string',
+                func: function(a, b) {
                     console.log(a, b);
                 }
             }
 
             var params = {
-                num : {
+                num: {
                     min : 0,
                     max : 1,
                     step : 0.1,
                     units : 'db',
                     label : 'Amplitude'
                 },
-
-                options : {
-                    options : ['A', 'B', 'C']
-                },
-
-                func : {
+                options : ['A', 'B', 'C'],
+                func: {
                     args : ['hello', 'world']
                 },
-
-                defaults: ['bool', 'string']
+                defaults: ['bool', 'string'],
+                ignore: [
+                    'ignored'
+                ]
             }           
 
             var uibot = UIBot();
