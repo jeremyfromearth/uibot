@@ -1,4 +1,5 @@
 var UIBotId = 0;
+
 function UIBot() {
     var bindId = 0;
     var inputs = [];
@@ -63,7 +64,7 @@ function UIBot() {
         return input;
     }
 
-    function createFunctionComponent(target, param, container) {
+    function createFunctionComponent(target, param, container, callback) {
         var div = document.createElement('div');
         div.className = 'function-container';
         

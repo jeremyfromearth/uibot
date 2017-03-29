@@ -1,6 +1,6 @@
 <html>
     <head>
-        <link rel='stylesheet' type='text/css' href='default-uibot.css'>
+        <link rel='stylesheet' type='text/css' href='phosphor-uibot.css'>
     </head>
     <body>
         <div id='uibot'></div>
@@ -15,7 +15,7 @@
                 func: function(a, b) {
                     console.log(a, b);
                 }
-            }
+            };
 
             var params = {
                 num: {
@@ -33,7 +33,7 @@
                 ignore: [
                     'ignored'
                 ]
-            }           
+            };
 
             var uibot = UIBot();
             uibot.build(target, params, document.getElementById('uibot'));
