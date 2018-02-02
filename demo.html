@@ -1,43 +1,47 @@
 <html>
-    <head>
-        <link rel='stylesheet' type='text/css' href='phosphor-uibot.css'>
-    </head>
-    <body>
-        <div id='uibot'></div>
-        <script src="uibot.js"></script>
-        <script type='text/javascript'>
-            var target = {
-                num: .5,
-                bool: false,
-                options: 'A',
-                string: 'Hello',
-                ignored: 'I am an ignored string',
-                func: function(a, b) {
-                    console.log(a, b);
-                }
-            };
+  <head>
+    <link rel='stylesheet' type='text/css' href='default-uibot.css'>
+  </head>
+  <body>
+    <div id='uibot'></div>
+    <script src="uibot.js"></script>
+    <script type='text/javascript'>
+      var target = {
+        num: .5,
+        mute: false,
+        waveform: 'Square',
+        preset: 'HexaBass',
+        ignored: 'I am an ignored string',
+        func: function(a, b) {
+          console.log(a, b);
+        }
+      };
 
-            var params = {
-                num: {
-                    min : 0,
-                    max : 1,
-                    step : 0.1,
-                    units : 'db',
-                    label : 'Amplitude'
-                },
-                options : ['A', 'B', 'C'],
-                func: {
-                    args : ['hello', 'world']
-                },
-                defaults: ['bool', 'string'],
-                ignore: [
-                    'ignored'
-                ]
-            };
+      var params = [
+        {
+          num: {
+            min : 0,
+            max : 1,
+            step : 0.01,
+            units : 'db',
+            label : 'Amplitude'
+          },
+        }, {
+          waveform : {
+            options: ['Square', 'Sine', 'Triangle']
+          },
+          func: {
+            args : ['hello', 'world']
+          },
+        }, {
+          defaults: ['mute', 'preset']
+        }
+      ];
 
-            var uibot = UIBot();
-            uibot.build(target, params, document.getElementById('uibot'));
-            uibot.bind();
-        </script>
-    </body>
+      var uibot = UIBot();
+      var el = document.getElementById('uibot');
+      uibot.build(target, params, el);
+      uibot.bind();
+    </script>
+  </body>
 </html>
