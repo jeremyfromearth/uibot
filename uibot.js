@@ -7,9 +7,8 @@ function UIBot() {
   var uibotId = ++UIBotId;
 
   function createUIElement(target, param, container, callback) {
-    if(!target.hasOwnProperty(param.name)) {
-      console.warn('UIBots Warning: target does not contain property: ', param.name);
-    } else {
+    //console.log(param.name, target[param.name], typeof(target[param.name]));
+    if(target.hasOwnProperty(param.name) || typeof(target[param.name] == 'function')) {
       var input = null;
       var type = typeof(target[param.name]); 
       switch(type) {
@@ -31,9 +30,10 @@ function UIBot() {
         input.setAttribute('data-param', param.name);
         input.id = 'uibot-' + uibotId + '-' + param.name;
       }
-      return input;
+    } else {
+      console.warn('UIBots Warning: target does not contain property: ', param.name);
     }
-    return null;
+    return input;
   }
 
   function createBooleanComponent(target, param, container, callback) {
@@ -98,7 +98,7 @@ function UIBot() {
 
     input.addEventListener('click', function(event) {
       var args = param.args || []
-      target[param.name].apply(null, args);
+      target[param.name].apply(target, args);
       if(callback) callback(event);
     });
 
