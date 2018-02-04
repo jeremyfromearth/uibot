@@ -39,6 +39,7 @@ function UIBot() {
   function createBooleanComponent(target, param, container, callback) {
     var div = document.createElement('div');
     div.className = 'component';
+    div.style.flexShrink = 8;
 
     var label = document.createElement('div');
     label.innerHTML = param.label;
@@ -87,6 +88,7 @@ function UIBot() {
   function createFunctionComponent(target, param, container, callback) {
     var div = document.createElement('div');
     div.className = 'component';
+    div.style.flexShrink = 2;
 
     var input = document.createElement('div');
     input.innerHTML = param.label;
@@ -174,9 +176,11 @@ function UIBot() {
       label.className = 'label';
 
       var input = document.createElement('input');
-      input.type = 'text';
       input.value = target[param.name];
       input.placeholder = param.placeholder || "";
+      input.style.flexGrow = 1;
+      input.type = 'text';
+
 
       if(param.hasOwnProperty('max_length')) {
         input.maxLength = param.max_length;
