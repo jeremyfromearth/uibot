@@ -7,7 +7,8 @@
     <script src="uibot.js"></script>
     <script type='text/javascript'>
       var target = {
-        num: .5,
+        num1: .5,
+        num2: 20,
         mute: false,
         waveform: 'Square',
         preset: 'HexaBass',
@@ -22,6 +23,7 @@
           defaults: ['mute', 'preset']
         }, {
           waveform : {
+            label: 'Waveform Choice',
             options: ['Square', 'Sine', 'Triangle']
           },
           func: {
@@ -29,12 +31,21 @@
             label: 'Trigger'
           }
         }, {
-          num: {
+          num1: {
             min : 0,
-            max : 1,
+            max : 10,
             step : 0.01,
             units : 'db',
             label : 'Amplitude'
+          }, 
+          
+        }, {
+          num2: {
+            min : 20,
+            max : 22000,
+            step : 1,
+            units : 'Hz',
+            label : 'Frequency'
           }
         }
       ];

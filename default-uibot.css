@@ -53,7 +53,8 @@
 
 .uibot .label {
   float: left;
-  margin-right: 0.4em;
+  margin-right: 0.5em;
+  white-space: nowrap;
 }
 
 .uibot .range-min, .range-max {
@@ -98,10 +99,6 @@
   border: 1px solid red;
 }
 
-.uibot .label {
-  margin-right: 0.5em;
-}
-
 .uibot input[type=text] {
   border: none;
   padding: 0.25em;
@@ -114,6 +111,10 @@
 
 .uibot input[type=checkbox]:checked ~ div {
    background: red;
+}
+
+.uibot .slider-value {
+  text-align: right;
 }
 
 /*https://css-tricks.com/styling-cross-browser-compatible-range-inputs-css*/
@@ -228,4 +229,15 @@
 
 .uibot input[type=range]:focus::-ms-fill-upper {
   background: #444;
+}
+
+.uibot select {
+  border-radius: 0;
+  font-family: Terminus;
+  background-color: #444;
+  border: none;
+  outline: none;
+  display: inline-block;
+  font-size: 0.9em;
+  color: white;
 }
