@@ -139,7 +139,7 @@ function UIBot() {
       container.appendChild(div);
 
       value.innerHTML = param.max + param.step + param.units;
-      value.style.minWidth = value.clientWidth;
+      value.style.minWidth = value.clientWidth + 'px';
 
       function update_value(event) {
         var v = Number(input.value);
