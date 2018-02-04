@@ -68,9 +68,10 @@
   background-color: red;  
   padding: 0.25em;
   border-radius: 0.1em;
-  cursor: hand;
+  cursor: pointer;
   user-select: none;
   border: 1px solid red;
+  white-space: nowrap;
 }
 
 .uibot .button:hover {

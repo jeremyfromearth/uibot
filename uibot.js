@@ -7,7 +7,6 @@ function UIBot() {
   var uibotId = ++UIBotId;
 
   function createUIElement(target, param, container, callback) {
-    //console.log(param.name, target[param.name], typeof(target[param.name]));
     if(target.hasOwnProperty(param.name) || typeof(target[param.name] == 'function')) {
       var input = null;
       var type = typeof(target[param.name]); 
@@ -39,7 +38,7 @@ function UIBot() {
   function createBooleanComponent(target, param, container, callback) {
     var div = document.createElement('div');
     div.className = 'component';
-    div.style.flexShrink = 8;
+    div.style.flexShrink = 16;
 
     var label = document.createElement('div');
     label.innerHTML = param.label;
@@ -88,7 +87,7 @@ function UIBot() {
   function createFunctionComponent(target, param, container, callback) {
     var div = document.createElement('div');
     div.className = 'component';
-    div.style.flexShrink = 2;
+    div.style.flexShrink = 16;
 
     var input = document.createElement('div');
     input.innerHTML = param.label;
@@ -220,6 +219,7 @@ function UIBot() {
   function createSelectComponent(target, param, container, callback) {
     var div = document.createElement('div');
     div.className = 'component';
+    div.style.flexShrink = 8;
 
     var label = document.createElement('div');
     label.innerHTML = param.label;
