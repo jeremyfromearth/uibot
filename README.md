@@ -1,8 +1,12 @@
 # uibot
 UIBot is a JavaScript library for quickly generating input controls such as text input, sliders, menus, buttons and toggles, nearly automatically. UIBot is intended to be used for rapid prototyping and interactive visualizations.
 
+![Image of a UIBot interface](img/demo.png)
+
 ## Basic Example
-In the example below, two sliders would be added to the container parameter supplied to the `build()` method in the last line. The first slider would have the label "Amplitude" and would provide values between 0 and 1 in increments of .01. The second slider would have the label "Frequency", and provide values between 1 and 20000 in increments of 1 and would also append the unit of measure "Hz" to the current value. The `enabled` property of the oscillator object would have a checkbox created for it using the default parameters.
+In the example below, two range sliders are added to the container supplied to the `build()` method in the last line. The first slider is labeled "Amplitude" and provides values between 0 and 1 in increments of .01. The second slider has the label "Frequency", and provides values between 1 and 20000 in increments of 1. Note that it also appends a unit of measure ("Hz") to the current value. The property called `defaults` is an array of variable names that will have components created for it with default settings. In this case the `enabled` property is a `boolean` so it will be represented by a checkbox, with a label containing the text "Enabled".
+
+> Note: `params` is an array of objects. Each object represents a row of UI elements.
 
 ```js
 var oscillator = {
@@ -11,7 +15,7 @@ var oscillator = {
     enabled : false
 }
 
-var params = {
+var params = [{
     // Set parameters for amplitude property
     amp : {
         step : .01,
@@ -27,7 +31,7 @@ var params = {
     },
     // Create a default component for all properties in the following list
     defaults: ['enabled']
-}
+}]
 
 
 function on_change(event) {
@@ -40,7 +44,7 @@ var ui = uibot.build(oscillator, params, container, on_change)
 ```
 
 ## Two-way Binding
-UIBot supports two-way data binding. That is to say that changes made to properties on the target object will be reflected in the UI. Binding is simple. Once your UI is created simply call the `bind()` method. You can optionally pass an value in milliseconds to the bind method indicating how often variables that are bound should be updated. The default is 500 milliseconds.
+UIBot supports two-way data binding. That is to say that changes made to properties on the target object will be reflected in the UI. Binding is simple. Once your UI is created simply call the `bind()` method. You can optionally pass a value in milliseconds to the bind method indicating how often variables that are bound should be updated. The default is 500 milliseconds.
 
 ```js
 uibot.bind();
@@ -63,7 +67,7 @@ Below is a list of supported data-types and the components that are created for 
 
 ## Parameter Object Specification
 Datatype: `Function`<br/>
-Input Type: Button
+Element Type: Button
 
 ```js
 function_name : {
@@ -78,7 +82,7 @@ function_name : {
 ```
 
 Datatype: `Number`<br/>
-Input Type: Slider or Select Menu
+Element Type: Slider or Select Menu
 ```js
 variable_name {
     // User friendly version of variable name, used as label
@@ -102,14 +106,14 @@ variable_name {
 
     // A list of numeric options
     // If this exists,
-    // step, range and units are ignored and a drop-down is displayed
+    // step, range and units are ignored and a select element is used for this variable
     // Optional
     options : [1, 2, 3, 4, 5],
 }
 ```
 
 Datatype: `String`<br/>
-Input Type: Text Input or Select Menu
+Element Type: Text Input or Select Menu
 ```js
 variable_name : {
     // User friendly version of variable name, used as label
@@ -126,7 +130,7 @@ variable_name : {
     // A list of text options
     // If this exists,
     // length, chars and charset
-    // are ignored and a drop-down is displayed
+    // are ignored and a select element is used for this variable
     // Optional
     options : [‘a’, ‘b’, ‘c’, ‘d’]
 
@@ -138,7 +142,7 @@ variable_name : {
 ```
 
 Datatype: `Boolean`<br/>
-Input Type: Checkbox
+Element Type: Checkbox
 ```js
 variable_name : {
     // User friendly version of variable name, used as label
